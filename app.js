@@ -122,4 +122,43 @@ for(let i=0; i < dias.length; i++){
         console.log(dias[i]);
     }
 }
+
+6) Vamos al supermercado. Crea un vector llamado carrito.
+a) Con un prompt ingresá un artículo, Con un segundo prompt el costo unitario y con un tercer prompt el monto por unidad.
+b) En el carrito solo ingresarás los artículos.
+c) En una variable irás sumando el valor de cada artículo que irás acumulando (monto por unidad * cantidad de unidades).
+d) La carga finalizará con un articulo con nombre 0 (cero).
+e) Finalmente mostrarás una factura con el siguiente formato:
+************************************
+FACTURA A - Número XXXXXXX-XXXXXXX-X
+Ítems:
+- Manteca
+- Cafe
+- Limones
+
+Total a facturar: $3500.00
+************************************
+
+let carrito = [], i=1, costo=0, cantidad=0, suma1=0, suma2=0 ;
+
+while(i){
+    carrito[i] = prompt("Ingrese un objeto de supermercado");
+    if(carrito[i] == 0){
+       break;
+    }
+    costo = parseInt(prompt("Ingrese el costo del Producto"));
+    cantidad = parseInt(prompt("Ingrese la cantidad del Producto"));
+    suma1 = costo * cantidad;
+    suma2 = suma1 + suma2;
+    i++;
+}
+
+console.log("********************************");
+console.log("Factura A - Numero 4376-235432-2");
+console.log("Items:");
+for(let j=1;j<carrito.length-1;j++){
+    console.log("      ",carrito[j]);
+}
+console.log("Total a facturar: $",suma2);
+console.log("********************************");
 */
