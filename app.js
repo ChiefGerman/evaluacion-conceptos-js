@@ -83,7 +83,7 @@ if(imc <= 18.5){
     console.log("Normal, IMC: ",imc);
 }else if(imc >= 25 && imc <= 29.9){
     console.log("Sobrepeso, IMC: ",imc);
-}else if(imc >= 30){
+}else{
     console.log("Sobrepeso, IMC: ",imc);
 }
 
@@ -92,4 +92,34 @@ a) Pida al usuario que ingrese un número y almacenala en una variable.
 b) Mostrá el tipo de dato.
 c) Si el tipo de dato no es un NUMBER, entonces mostrá un console.error "Ingresá un valor numérico"
 d) Si el tipo de dato no es un NUMBER volvé a pedirlo tantas veces sea necesario hasta que se valide que el número ingresado es de tipo NUMBER
+
+let valor=0;
+
+while(valor != 1){
+    valor = parseInt(prompt("Ingrese un valor numero"));
+    if(isNaN(valor)){
+        alert("INGRESE UN VALOR NUMERICO!");
+        valor = 0;
+    }else{
+        alert("EL VALOR INGRESADO ES UN NUMERO.");
+        alert("FIN DEL PROGRAMA.");
+
+        valor = 1;
+    }
+}
+
+5)
+a) Ingresá un vector llamado dias, en donde se carguen los días lunes a domingo.
+b) Mostrá uno por uno los días de la semana. 
+c) Cuando sea Sabado o Domingo, deberá mostrarse la leyenda "Fin de semana!"
+
+const dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
+
+for(let i=0; i < dias.length; i++){
+    if(i==5 || i==6){
+        console.log(dias[i]," - Fin de semana");
+    }else{
+        console.log(dias[i]);
+    }
+}
 */
