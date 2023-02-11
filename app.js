@@ -138,32 +138,67 @@ FACTURA A - Número XXXXXXX-XXXXXXX-X
 
 Total a facturar: $3500.00
 ************************************
-*/
-let Items = [], i=1, j=1, costo = [], cantidad = [], suma1 = [], suma2=0, modificar = "NO", modificar2= 0;
 
+7) Modifica el punto anterior para que, antes de finalizar la carga pregunte si queremos editar. Si responde "SI" entonces.
+a) Que indique con un número el ítem que quiere modificar. 
+b) Se reemplazara el nombre del artículo pero no la cantidad y el costo. 
+c) Una vez finalizado el reemplazo se preguntará si quiere seguir modificando. En caso afirmativo pasaremos al punto (a) y sino se mostrará el punto (6 - e
+
+8) Modificá el ejercicio anterior para que haya un vector que sea "ítems"; otro, "precio por unidad" y el tercero "cantidad comprada".
+a) Al señalar un campo a modificar (ingresado a partir del índice del mismo) debes pedir el nombre del ítem, la cantidad y el precio. Y modificarlos en cada vector.
+b) Cuando ya no se busque modificar alguno de los ítems, se mostrará el resultado final (punto 6 - e)
+
+9) Crearemos un log.
+Los sistemas de logueo son sistemas que muestran todo el trackeo de los datos. Suelen usarse en sistemas de bases de datos que requieren auditoría para comprender quiénes hicieron determinados cambios.
+a) Al ejercicio anterior se agregará un vector nuevo que irá grabando cada movimiento que se genere. Si seguimos el ejercicio 6 quedaría:
+****** INICIO LOG ********
+[AGREGO] Manteca - 1 unidad - $500
+[AGREGO] Cafe - 2 Unidades - $370
+[AGREGO] Limones - 10 unidades - $25
+Y luego modificamos (por el ejercicio 7) el cafe por Malta, su precio y la cantidad, entonces el registro continuaría:
+[MODIFICO] Cafe por Malta - 2 unidades por 3 unidades - $370 por $125
+****** FIN LOG ********
+Nota: Lo importante en los sistemas de logueo es que no se pierde ningún valor de los ingresados.
+*/
+
+let Items = [], i=1, j=1, costo = [], cantidad = [], suma1 = [], suma2=0, modificar = "NO", modificar2= 0, modificacion = [];
+
+function ListadoProductos(){
+    console.log("              Producto   |   costo   |   cantidad");
+    for(i=1;i<Items.length;i++){
+        if(modificacion[i] == 1){
+            console.log("[MODIFICO]   "+ i +" - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
+        }else{
+            console.log("[AGREGO]   "+ i +" - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
+        }
+    }
+}
+
+console.log("****** INICIO LOG ********");
 while(i){
     Items[i] = prompt("Ingrese un producto de supermercado (Ingresa 0 para finalizar la carga)");
 
     if(Items[i] == 0){
        modificar = prompt("Desea modificar alguno de los productos ingresados? SI / NO");
-        
+       Items.pop();//elimina el elemento "0"
        if(modificar == "SI"){
-        console.log("     Producto   |   costo   |   cantidad");
-        for(i=1;i<Items.length-1;i++){
-            console.log(i," - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
-        }
+        i = 1;
+
         while(modificar == "SI"){
         i = 1;
         modificar2 = parseInt(prompt("Que producto desea modificar? (Ingrese un numero)"));
         i = modificar2;
+        
+        if(modificar == "SI"){
+            modificacion[i] = 1;
+        }
+
         Items[i] = prompt("Ingrese el NUEVO nombre del producto");
         costo[i] = parseInt(prompt("Ingrese el NUEVO costo del Producto"));
         cantidad[i] = parseInt(prompt("Ingrese la NUEVA cantidad del Producto"));
-        console.log("      -      -      -      -      ");
-        console.log("     Producto   |   costo   |   cantidad");
-        for(i=1;i<Items.length-1;i++){
-            console.log(i," - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
-        }
+
+        ListadoProductos();
+
         modificar = prompt("Desea seguir modificando productos? SI / NO");
         }
        }else{
@@ -177,31 +212,20 @@ while(i){
         costo[i] = parseInt(prompt("Ingrese el costo del Producto"));
         cantidad[i] = parseInt(prompt("Ingrese la cantidad del Producto"));
         i++;
+        ListadoProductos();
     }
 }
 
 for(j=1;j<costo.length;j++){
     suma1[j]= costo[j] * cantidad[j];
-    suma2 = suma1[j] + suma2; 
+    suma2 = suma1[j] + suma2;
 }
 
+console.log("****** FIN LOG ********");
+console.log(" ");
 console.log("********************************");
 console.log("Factura A - Numero 4376-235432-2");
 console.log("Items:");
-for(j=1;j<Items.length-1;j++){
-    console.log("      ",Items[j]);
-}
+ListadoProductos();
 console.log("Total a facturar: $",suma2);
 console.log("********************************");
-
-/*
-7) Modifica el punto anterior para que, antes de finalizar la carga pregunte si queremos editar. Si responde "SI" entonces.
-a) Que indique con un número el ítem que quiere modificar. 
-b) Se reemplazara el nombre del artículo pero no la cantidad y el costo. 
-c) Una vez finalizado el reemplazo se preguntará si quiere seguir modificando. En caso afirmativo pasaremos al punto (a) y sino se mostrará el punto (6 - e
-
-8) Modificá el ejercicio anterior para que haya un vector que sea "ítems"; otro, "precio por unidad" y el tercero "cantidad comprada".
-a) Al señalar un campo a modificar (ingresado a partir del índice del mismo) debes pedir el nombre del ítem, la cantidad y el precio. Y modificarlos en cada vector.
-b) Cuando ya no se busque modificar alguno de los ítems, se mostrará el resultado final (punto 6 - e)
-*/
-
