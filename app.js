@@ -138,27 +138,70 @@ FACTURA A - Número XXXXXXX-XXXXXXX-X
 
 Total a facturar: $3500.00
 ************************************
-
-let carrito = [], i=1, costo=0, cantidad=0, suma1=0, suma2=0 ;
+*/
+let Items = [], i=1, j=1, costo = [], cantidad = [], suma1 = [], suma2=0, modificar = "NO", modificar2= 0;
 
 while(i){
-    carrito[i] = prompt("Ingrese un objeto de supermercado");
-    if(carrito[i] == 0){
-       break;
+    Items[i] = prompt("Ingrese un producto de supermercado (Ingresa 0 para finalizar la carga)");
+
+    if(Items[i] == 0){
+       modificar = prompt("Desea modificar alguno de los productos ingresados? SI / NO");
+        
+       if(modificar == "SI"){
+        console.log("     Producto   |   costo   |   cantidad");
+        for(i=1;i<Items.length-1;i++){
+            console.log(i," - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
+        }
+        while(modificar == "SI"){
+        i = 1;
+        modificar2 = parseInt(prompt("Que producto desea modificar? (Ingrese un numero)"));
+        i = modificar2;
+        Items[i] = prompt("Ingrese el NUEVO nombre del producto");
+        costo[i] = parseInt(prompt("Ingrese el NUEVO costo del Producto"));
+        cantidad[i] = parseInt(prompt("Ingrese la NUEVA cantidad del Producto"));
+        console.log("      -      -      -      -      ");
+        console.log("     Producto   |   costo   |   cantidad");
+        for(i=1;i<Items.length-1;i++){
+            console.log(i," - "+Items[i]+"         $"+costo[i]+"         "+cantidad[i]);
+        }
+        modificar = prompt("Desea seguir modificando productos? SI / NO");
+        }
+       }else{
+        break;
+       }
+       if(modificar!="SI"){
+            break;
+        }
+       
+    }else{
+        costo[i] = parseInt(prompt("Ingrese el costo del Producto"));
+        cantidad[i] = parseInt(prompt("Ingrese la cantidad del Producto"));
+        i++;
     }
-    costo = parseInt(prompt("Ingrese el costo del Producto"));
-    cantidad = parseInt(prompt("Ingrese la cantidad del Producto"));
-    suma1 = costo * cantidad;
-    suma2 = suma1 + suma2;
-    i++;
+}
+
+for(j=1;j<costo.length;j++){
+    suma1[j]= costo[j] * cantidad[j];
+    suma2 = suma1[j] + suma2; 
 }
 
 console.log("********************************");
 console.log("Factura A - Numero 4376-235432-2");
 console.log("Items:");
-for(let j=1;j<carrito.length-1;j++){
-    console.log("      ",carrito[j]);
+for(j=1;j<Items.length-1;j++){
+    console.log("      ",Items[j]);
 }
 console.log("Total a facturar: $",suma2);
 console.log("********************************");
+
+/*
+7) Modifica el punto anterior para que, antes de finalizar la carga pregunte si queremos editar. Si responde "SI" entonces.
+a) Que indique con un número el ítem que quiere modificar. 
+b) Se reemplazara el nombre del artículo pero no la cantidad y el costo. 
+c) Una vez finalizado el reemplazo se preguntará si quiere seguir modificando. En caso afirmativo pasaremos al punto (a) y sino se mostrará el punto (6 - e
+
+8) Modificá el ejercicio anterior para que haya un vector que sea "ítems"; otro, "precio por unidad" y el tercero "cantidad comprada".
+a) Al señalar un campo a modificar (ingresado a partir del índice del mismo) debes pedir el nombre del ítem, la cantidad y el precio. Y modificarlos en cada vector.
+b) Cuando ya no se busque modificar alguno de los ítems, se mostrará el resultado final (punto 6 - e)
 */
+
